@@ -9,10 +9,10 @@ export default function Footer() {
           <div className="col-span-1">
             <div className="flex items-center space-x-3 mb-4">
               <Navigation className="h-6 w-6" style={{ color: '#1e96fc' }} />
-              <h3 className="text-xl font-semibold text-white">RouteWise</h3>
+              <h3 className="text-xl font-semibold text-white">Delhight</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Your intelligent route planning companion. Find the best paths with real-time data and smart optimization.
+              Your intelligent Delhi route planning companion. Find the best paths with real-time data and smart optimization.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export default function Footer() {
             <h4 className="text-white font-medium mb-4">Contact</h4>
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-2">
-                <span>support@routewise.com</span>
+                <span>support@delhight.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <span>+91 (555) 123-4567</span>
@@ -57,7 +57,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400">
-            © 2025 RouteWise. All rights reserved.
+            © 2025 Delhight. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-sm text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a>

@@ -1,5 +1,5 @@
 import { Navigation } from 'lucide-react';
-import { useNavigate, Link } from 'react-router';
+import { useNavigate } from 'react-router';
 
 interface HeaderProps {
   showNewSearchButton?: boolean;
@@ -19,7 +19,7 @@ export default function Header({ showNewSearchButton = false }: HeaderProps) {
           <div className="flex items-center space-x-3">
             <Navigation className="h-7 w-7" style={{ color: '#1e96fc' }} />
             <h1 className="text-2xl font-semibold" style={{ color: '#00072d' }}>
-              RouteWise
+              Delhight
             </h1>
           </div>
           {showNewSearchButton && (

@@ -8,6 +8,7 @@ interface RouteData {
   cost: string;
   type: string;
   color: string;
+  transportModes?: any[];
 }
 
 interface MapViewProps {
@@ -25,60 +26,68 @@ export default function MapView({ routes, from, to }: MapViewProps) {
       
       {/* Map Image Container */}
       <div className="rounded-xl h-96 flex items-center justify-center relative overflow-hidden border border-gray-200">
-        {/* Sample Map Image - Replace with actual map image */}
+        {/* Delhi Map Image */}
         <img 
           src="/images/delhi_map.ppm"
-          alt="Route Map"
+          alt="Delhi Route Map"
           className="w-full h-full object-cover rounded-xl"
+          onError={(e) => {
+            // Fallback if image doesn't load
+            e.currentTarget.src = "data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100' height='100' fill='%23f9f9f9'/%3e%3ctext x='50' y='50' font-size='14' text-anchor='middle' dy='.3em' fill='%231e96fc'%3eDelhi Map%3c/text%3e%3c/svg%3e";
+          }}
         />
         
         {/* Overlay with route visualization */}
-        <div className="absolute inset-0 bg-black/5 rounded-xl">
+        <div className="absolute inset-0 bg-black/10 rounded-xl">
           {/* Mock Route Lines */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
-            <path
-              d="M50 350 Q200 100 350 50"
-              stroke="#1e96fc"
-              strokeWidth="3"
-              fill="none"
-              strokeDasharray="5,5"
-              className="animate-pulse"
-            />
-            <path
-              d="M50 350 Q150 200 350 50"
-              stroke="#6B7280"
-              strokeWidth="3"
-              fill="none"
-              strokeDasharray="3,3"
-            />
-            <path
-              d="M50 350 Q250 300 350 50"
-              stroke="#9CA3AF"
-              strokeWidth="3"
-              fill="none"
-              strokeDasharray="7,3"
-            />
+            {routes.slice(0, 3).map((route, index) => {
+              const paths = [
+                "M50 350 Q200 100 350 50",
+                "M50 350 Q150 200 350 50", 
+                "M50 350 Q250 300 350 50"
+              ];
+              return (
+                <path
+                  key={route.id}
+                  d={paths[index] || paths[0]}
+                  stroke={route.color}
+                  strokeWidth="3"
+                  fill="none"
+                  strokeDasharray={index === 0 ? "5,5" : "3,3"}
+                  className={index === 0 ? "animate-pulse" : ""}
+                />
+              );
+            })}
           </svg>
 
           {/* Start and End Points */}
-          <div className="absolute bottom-6 left-6 w-4 h-4 rounded-full border-2 border-white shadow-lg" style={{ backgroundColor: '#1e96fc' }}></div>
-          <div className="absolute top-6 right-6 w-4 h-4 rounded-full border-2 border-white shadow-lg" style={{ backgroundColor: '#1e96fc' }}></div>
+          <div className="absolute bottom-6 left-6 w-4 h-4 rounded-full border-2 border-white shadow-lg" style={{ backgroundColor: '#10B981' }}>
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-medium text-white bg-black/70 px-2 py-1 rounded">
+              Start
+            </div>
+          </div>
+          <div className="absolute top-6 right-6 w-4 h-4 rounded-full border-2 border-white shadow-lg" style={{ backgroundColor: '#EF4444' }}>
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs font-medium text-white bg-black/70 px-2 py-1 rounded">
+              End
+            </div>
+          </div>
 
           {/* Map Controls */}
           <div className="absolute top-4 left-4 space-y-2">
-            <button className="bg-white w-8 h-8 rounded shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 border border-gray-200">
+            <button className="bg-white w-8 h-8 rounded shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 border border-gray-200 font-medium">
               +
             </button>
-            <button className="bg-white w-8 h-8 rounded shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 border border-gray-200">
+            <button className="bg-white w-8 h-8 rounded shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-50 border border-gray-200 font-medium">
               −
             </button>
           </div>
 
-          {/* Center overlay text */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-gray-700 bg-white/80 p-4 rounded-lg">
-              <Navigation className="h-8 w-8 mx-auto mb-2" style={{ color: '#1e96fc' }} />
-              <p className="text-sm font-medium">Route Map</p>
+          {/* Map Info Overlay */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <div className="text-center text-gray-700 bg-white/90 backdrop-blur-sm p-3 rounded-lg border border-gray-200">
+              <Navigation className="h-6 w-6 mx-auto mb-1" style={{ color: '#1e96fc' }} />
+              <p className="text-sm font-medium">Delhi Routes</p>
               <p className="text-xs opacity-75">From {from} to {to}</p>
             </div>
           </div>
@@ -91,7 +100,7 @@ export default function MapView({ routes, from, to }: MapViewProps) {
           Route Legend:
         </h4>
         <div className="space-y-2">
-          {routes.map((route) => (
+          {routes.slice(0, 3).map((route) => (
             <div key={route.id} className="flex items-center space-x-3 text-sm">
               <div
                 className="w-4 h-1 rounded"
