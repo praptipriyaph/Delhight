@@ -27,7 +27,7 @@ export default function MapView({ routes, from, to }: MapViewProps) {
       <div className="rounded-xl h-96 flex items-center justify-center relative overflow-hidden border border-gray-200">
         {/* Sample Map Image - Replace with actual map image */}
         <img 
-          src="https://via.placeholder.com/600x400/f9f9f9/1e96fc?text=Interactive+Map+View"
+          src="/images/delhi_map.ppm"
           alt="Route Map"
           className="w-full h-full object-cover rounded-xl"
         />
