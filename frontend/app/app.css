@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Custom colors for the project */
+:root {
+  --color-navy: #00072d;
+  --color-blue: #1e96fc;
+  --color-light: #f9f9f9;
+}
+
+/* Custom animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
